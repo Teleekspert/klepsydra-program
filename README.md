@@ -71,13 +71,15 @@ The Solana platform tools ship cargo 1.84, so `Cargo.lock` was generated with `C
 
 ## Tests
 
-`tests/` holds the scripts and `tests/results/` the logs of the runs on 2026-10-19.
+`tests/` holds the scripts and `tests/results/` the logs of the runs on 2026-10-19 and 2026-10-20.
 
 | Script | What it checks | Result |
 |---|---|---|
 | `devnet-test.mjs` | full cycle and negative cases on `solana-test-validator` | 14/14 |
 | `devnet-test-slow.mjs` | the same cycle on public devnet, throttled for the public RPC | 14/14 |
 | `streamflow-hook-test.mjs` | Streamflow vesting contracts moving $KLEPS through the hook | 9/9 |
+| `orca-hook-test.mjs` | Orca Whirlpools (mainnet program and config on a local validator, badge simulated): pool, liquidity, buy, dividend, claim, sell | 14/14 |
+| `cpmm-hook-test.mjs` | Raydium CPMM (mainnet program on a local validator): pool creation | rejected, `6007 NotSupportMint` |
 | `create-devnet-mint.mjs` | creates the test mint, removes its authorities, runs `initialize` | — |
 
 ```bash

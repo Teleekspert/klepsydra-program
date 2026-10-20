@@ -1,0 +1,18 @@
+Lokalny walidator: program Orca Whirlpools i konfiguracja 2Lecsh…NQ2NQ sklonowane z mainnetu,
+token_badge_authority w config extension podmieniony lokalnie na nasz klucz (symulacja wydania badge przez Orca).
+OK   token z hookiem Klepsydry gotowy — 6FCNB9qrioVBYNq2h1fRV5U6bbD5ykD4d51yUfKgh5bd
+OK   Orca: konfiguracja z mainnetu (fee tier 64) — 2LecshUwdy9xi7meFgHtFJQNSKk4KdTrcpvaB56dP2NQ
+OK   pula bez token badge jest odrzucana — custom program error: 0x179f
+OK   Orca: token badge dla KLEPS
+OK   Orca: pula SOL/KLEPS z badge — Fqjbpa5wyfKbWxkr1ZRMcmDg15utCdrR7p5D1h5SZAZr
+OK   płynność: 10 SOL + 700 mln KLEPS (przelew przez hook)
+OK   hook: tokeny w puli nie zarabiają (registered_supply spadło) — 697 131 113 KLEPS wyszło z podziału
+OK   swap: kupno KLEPS za 1 SOL (hook przy wypłacie z puli) — 63 202 554 KLEPS
+OK   register kupującego
+OK   distribute 1 SOL
+OK   claim kupującego
+OK   kupujący dostał swoją część — oczekiwane 0.172651, otrzymał 0.172646 SOL (minus opłata)
+OK   swap: sprzedaż połowy KLEPS (hook przy wpłacie do puli)
+OK   hook: saldo kupującego w programie po sprzedaży — last_balance 31 601 277 KLEPS
+
+WYNIK: 14 OK, 0 FAIL

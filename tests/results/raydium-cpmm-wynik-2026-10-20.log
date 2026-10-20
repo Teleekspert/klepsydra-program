@@ -1,0 +1,3 @@
+Lokalny walidator: program Raydium CPMM (CPMMoo8L3F4NbTegBCKVNunggL7H1ZpdTHKxQB5qKP1C) i konfiguracja D4FPEr…BvC2 sklonowane z mainnetu.
+OK   token z hookiem gotowy: Cb7FpZ1youn4Dk8ZN9AYCSEnUyQHw4EXmMvBcfgaAD2k
+FAIL tworzenie puli CPMM: InstructionError [2, Custom 6007] = NotSupportMint ("Not support token_2022 mint extension")
