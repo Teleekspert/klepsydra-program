@@ -1,0 +1,19 @@
+Program: CfW1pzZgwzRAYb4DfnAofQ2GRBkFJFrxHAaCurEUBpao payer: 8TmsSAsJvkzfSiJD9VqpWrJaTz8Ur15QmnwY1TqSnEsw SOL: 0.120842
+OK   initialize odrzuca mint z freeze authority — FreezeAuthorityActive
+OK   initialize odrzuca mint z aktywnym mint authority — MintAuthorityActive
+OK   initialize na czystym mincie — C8T3W8G5m8bgoxdXbrD2NdDNNkt6BULGFYwru1ZDMu8r
+OK   hook: registered_supply po transferze = 1 000 000
+OK   hook: transfer do niezarejestrowanego zmniejsza registered_supply
+OK   claim Alicja = 0,0165 SOL — otrzymała 0.016500
+OK   claim Bob = 0,0125 SOL (burn nie zabrał naliczonego) — otrzymał 0.012500
+OK   burn zsynchronizowany: registered_supply = 800 000
+OK   Karolina (niezarejestrowana) nie może odebrać — AccountNotInitialized
+OK   unregister Bob: 0,004 SOL + zwrot czynszu — +0.005021
+OK   po unregister registered_supply = 400 000 (Alicja)
+OK   transfer od niezarejestrowanego do zarejestrowanego
+OK   Alicja dostaje 0,004 z wypłaty 4 — otrzymała 0.004000
+OK   hook wywołany ręcznie jest odrzucany — NotTransferring
+
+Rozdzielono 0.037000 SOL, odebrano 0.037000 SOL, mint C8T3W8G5m8bgoxdXbrD2NdDNNkt6BULGFYwru1ZDMu8r
+Saldo płatnika po teście: 0.036933 SOL
+WYNIK: 14 OK, 0 FAIL

@@ -1,0 +1,13 @@
+OK   start: registered_supply = 1 000 000 (twórca)
+OK   Streamflow: utworzenie blokady 100 000 $KLEPS — BP5s5uzrwKo7CETz6Tm8QQhEXSa6vDr4WT86VhBTEngk
+OK   Streamflow: utworzenie vestingu 200 000 $KLEPS — 2tRHTr8rSaPsSkWwC8qz3XiQxRdr87zNBVjxpyw27fHP
+     opłata Streamflow w tokenach: 100 $KLEPS
+OK   hook: tokeny w escrow Streamflow nie zarabiają (registered = saldo twórcy) — 699900
+czekam na odblokowanie (~50 s)…
+OK   Streamflow: wypłata z blokady do Boba
+OK   Streamflow: wypłata z vestingu do Boba
+OK   Bob dostał wszystkie odblokowane tokeny — 300000 $KLEPS
+OK   hook: po wypłacie Bob (zarejestrowany) znów liczy się do podziału — 999900
+OK   dywidenda: Bob dostaje swoją część 1 SOL (saldo/zarejestrowane) — 0.300030003 SOL
+
+WYNIK: 9 OK, 0 FAIL (mint 6WbhGsQVh1AixEFBVBfjmgTfeKRuRs4KA1q1Qu6pFyiX)

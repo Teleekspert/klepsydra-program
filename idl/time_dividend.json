@@ -1,0 +1,845 @@
+{
+  "address": "CfW1pzZgwzRAYb4DfnAofQ2GRBkFJFrxHAaCurEUBpao",
+  "metadata": {
+    "name": "time_dividend",
+    "version": "0.1.0",
+    "spec": "0.1.0"
+  },
+  "instructions": [
+    {
+      "name": "claim",
+      "docs": [
+        "Odbiera dywidendę na `recipient`. `amount == 0` oznacza całość."
+      ],
+      "discriminator": [
+        62,
+        198,
+        214,
+        193,
+        213,
+        159,
+        108,
+        210
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "signer": true
+        },
+        {
+          "name": "config",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "mint"
+              }
+            ]
+          }
+        },
+        {
+          "name": "mint"
+        },
+        {
+          "name": "token_account",
+          "docs": [
+            "Właściciel sprawdzany na bieżąco — działa też po zmianie właściciela konta."
+          ],
+          "relations": [
+            "holder"
+          ]
+        },
+        {
+          "name": "holder",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  104,
+                  111,
+                  108,
+                  100,
+                  101,
+                  114
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "token_account"
+              }
+            ]
+          }
+        },
+        {
+          "name": "recipient",
+          "writable": true
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "distribute",
+      "docs": [
+        "Wpłaca `amount` lamportów (może być 0) i rozdziela całą nierozliczoną",
+        "nadwyżkę SOL na koncie konfiguracji — także SOL wysłane tam zwykłym",
+        "przelewem. Może wywołać każdy."
+      ],
+      "discriminator": [
+        191,
+        44,
+        223,
+        207,
+        164,
+        236,
+        126,
+        61
+      ],
+      "accounts": [
+        {
+          "name": "payer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "config",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "config.mint",
+                "account": "Config"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "initialize",
+      "docs": [
+        "Tworzy konfigurację i listę dodatkowych kont dla hooka.",
+        "Odmawia, jeśli mint ma jakąkolwiek formę administratora."
+      ],
+      "discriminator": [
+        175,
+        175,
+        109,
+        31,
+        13,
+        152,
+        155,
+        237
+      ],
+      "accounts": [
+        {
+          "name": "payer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "mint"
+        },
+        {
+          "name": "config",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "mint"
+              }
+            ]
+          }
+        },
+        {
+          "name": "extra_account_meta_list",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  101,
+                  120,
+                  116,
+                  114,
+                  97,
+                  45,
+                  97,
+                  99,
+                  99,
+                  111,
+                  117,
+                  110,
+                  116,
+                  45,
+                  109,
+                  101,
+                  116,
+                  97,
+                  115
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "mint"
+              }
+            ]
+          }
+        },
+        {
+          "name": "token_program",
+          "address": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "register",
+      "docs": [
+        "Właściciel konta tokenowego dołącza je do podziału dywidendy.",
+        "Konto zaczyna zarabiać od wypłat dokonanych po rejestracji."
+      ],
+      "discriminator": [
+        211,
+        124,
+        67,
+        15,
+        211,
+        194,
+        178,
+        240
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "config",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "mint"
+              }
+            ]
+          }
+        },
+        {
+          "name": "mint"
+        },
+        {
+          "name": "token_account"
+        },
+        {
+          "name": "holder",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  104,
+                  111,
+                  108,
+                  100,
+                  101,
+                  114
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "token_account"
+              }
+            ]
+          }
+        },
+        {
+          "name": "token_program",
+          "address": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "transfer_hook",
+      "docs": [
+        "Wywoływane przez Token-2022 przy każdym transferze tokena."
+      ],
+      "discriminator": [
+        105,
+        37,
+        101,
+        197,
+        75,
+        251,
+        102,
+        26
+      ],
+      "accounts": [
+        {
+          "name": "source_token"
+        },
+        {
+          "name": "mint"
+        },
+        {
+          "name": "destination_token"
+        },
+        {
+          "name": "owner"
+        },
+        {
+          "name": "extra_account_meta_list",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  101,
+                  120,
+                  116,
+                  114,
+                  97,
+                  45,
+                  97,
+                  99,
+                  99,
+                  111,
+                  117,
+                  110,
+                  116,
+                  45,
+                  109,
+                  101,
+                  116,
+                  97,
+                  115
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "mint"
+              }
+            ]
+          }
+        },
+        {
+          "name": "config",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "mint"
+              }
+            ]
+          }
+        },
+        {
+          "name": "source_holder",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  104,
+                  111,
+                  108,
+                  100,
+                  101,
+                  114
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "source_token"
+              }
+            ]
+          }
+        },
+        {
+          "name": "destination_holder",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  104,
+                  111,
+                  108,
+                  100,
+                  101,
+                  114
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "destination_token"
+              }
+            ]
+          }
+        }
+      ],
+      "args": [
+        {
+          "name": "_amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "unregister",
+      "docs": [
+        "Wypłaca całą dywidendę właścicielowi, wycofuje konto z podziału",
+        "i zamyka rekord `holder` (zwrot czynszu)."
+      ],
+      "discriminator": [
+        143,
+        28,
+        144,
+        79,
+        140,
+        220,
+        228,
+        248
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "config",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "mint"
+              }
+            ]
+          }
+        },
+        {
+          "name": "mint"
+        },
+        {
+          "name": "token_account",
+          "relations": [
+            "holder"
+          ]
+        },
+        {
+          "name": "holder",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  104,
+                  111,
+                  108,
+                  100,
+                  101,
+                  114
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "token_account"
+              }
+            ]
+          }
+        }
+      ],
+      "args": []
+    }
+  ],
+  "accounts": [
+    {
+      "name": "Config",
+      "discriminator": [
+        155,
+        12,
+        170,
+        224,
+        30,
+        250,
+        204,
+        130
+      ]
+    },
+    {
+      "name": "Holder",
+      "discriminator": [
+        37,
+        121,
+        1,
+        40,
+        55,
+        46,
+        199,
+        157
+      ]
+    }
+  ],
+  "events": [
+    {
+      "name": "ClaimDividend",
+      "discriminator": [
+        67,
+        104,
+        246,
+        173,
+        141,
+        252,
+        70,
+        4
+      ]
+    },
+    {
+      "name": "DistributeDividend",
+      "discriminator": [
+        158,
+        158,
+        48,
+        41,
+        153,
+        92,
+        201,
+        146
+      ]
+    },
+    {
+      "name": "Registered",
+      "discriminator": [
+        11,
+        222,
+        10,
+        72,
+        160,
+        110,
+        165,
+        227
+      ]
+    },
+    {
+      "name": "Unregistered",
+      "discriminator": [
+        210,
+        177,
+        26,
+        51,
+        255,
+        164,
+        28,
+        131
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "MintAuthorityActive",
+      "msg": "Mint ma aktywny mint authority — podaż nie jest stała"
+    },
+    {
+      "code": 6001,
+      "name": "FreezeAuthorityActive",
+      "msg": "Mint ma freeze authority — ktoś mógłby zamrażać konta"
+    },
+    {
+      "code": 6002,
+      "name": "WrongTransferHook",
+      "msg": "Transfer hook mintu nie wskazuje na ten program"
+    },
+    {
+      "code": 6003,
+      "name": "HookAuthorityActive",
+      "msg": "Transfer hook ma autorytet — ktoś mógłby podmienić program"
+    },
+    {
+      "code": 6004,
+      "name": "ForbiddenExtension",
+      "msg": "Mint ma niedozwolone rozszerzenie (permanent delegate, opłaty itp.)"
+    },
+    {
+      "code": 6005,
+      "name": "NotTransferring",
+      "msg": "Hook wywołany poza transferem Token-2022"
+    },
+    {
+      "code": 6006,
+      "name": "NoParticipants",
+      "msg": "Brak zarejestrowanych posiadaczy"
+    },
+    {
+      "code": 6007,
+      "name": "NothingToDistribute",
+      "msg": "Brak nowego SOL do rozdzielenia"
+    },
+    {
+      "code": 6008,
+      "name": "NothingToClaim",
+      "msg": "Brak dywidendy do odebrania"
+    },
+    {
+      "code": 6009,
+      "name": "VaultInsufficient",
+      "msg": "Za mało SOL w skarbcu"
+    },
+    {
+      "code": 6010,
+      "name": "HolderMismatch",
+      "msg": "Rekord holder nie pasuje do konta tokenowego"
+    },
+    {
+      "code": 6011,
+      "name": "MathOverflow",
+      "msg": "Przepełnienie arytmetyczne"
+    }
+  ],
+  "types": [
+    {
+      "name": "ClaimDividend",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "token_account",
+            "type": "pubkey"
+          },
+          {
+            "name": "recipient",
+            "type": "pubkey"
+          },
+          {
+            "name": "lamports",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Config",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "mint",
+            "type": "pubkey"
+          },
+          {
+            "name": "mag_per_share",
+            "docs": [
+              "Skumulowana dywidenda na jednostkę tokena × MAGNITUDE."
+            ],
+            "type": "u128"
+          },
+          {
+            "name": "carry",
+            "docs": [
+              "Reszta z ostatniego dzielenia (w jednostkach × MAGNITUDE)."
+            ],
+            "type": "u128"
+          },
+          {
+            "name": "registered_supply",
+            "docs": [
+              "Suma sald zarejestrowanych kont — tylko one dzielą dywidendę."
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "total_distributed",
+            "type": "u64"
+          },
+          {
+            "name": "total_claimed",
+            "type": "u64"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "DistributeDividend",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "from",
+            "type": "pubkey"
+          },
+          {
+            "name": "lamports",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Holder",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "token_account",
+            "type": "pubkey"
+          },
+          {
+            "name": "last_balance",
+            "docs": [
+              "Saldo widziane przy ostatniej synchronizacji."
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "correction",
+            "type": "i128"
+          },
+          {
+            "name": "claimed",
+            "type": "u64"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Registered",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "token_account",
+            "type": "pubkey"
+          },
+          {
+            "name": "balance",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Unregistered",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "token_account",
+            "type": "pubkey"
+          }
+        ]
+      }
+    }
+  ]
+}
