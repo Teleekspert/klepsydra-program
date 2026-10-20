@@ -52,7 +52,12 @@ PDAs: `config = ["config", mint]`, `holder = ["holder", token_account]`, `extra-
 
 Clients must pass the hook's extra accounts on transfers. `createTransferCheckedWithTransferHookInstruction` from `@solana/spl-token` does this.
 
-Where the token can trade: Raydium CPMM accepts Token-2022 mints with an active transfer hook (its `SwapV2` forwards the hook accounts). Meteora DAMM v2 does not: it accepts a hook only when both the hook program and authority are unset. Meteora DBC revokes the hook when the bonding curve completes, which would switch the dividend off, so it is not a launch path for this token.
+Where the token can trade (checked 2026-10-20):
+
+- **Raydium CPMM: no.** Creating a pool with the mainnet program (cloned to a local validator) fails with `6007 NotSupportMint`; the program accepts a transfer-hook mint only after Raydium whitelists it, and its vault transfers do not pass the hook accounts.
+- **Meteora DAMM v2: no.** It accepts a hook only when both the hook program and authority are unset.
+- **Meteora DBC: no.** It revokes the hook when the bonding curve completes, which would switch the dividend off.
+- **Orca Whirlpools: yes, with a token badge.** Whirlpools accept a transfer-hook mint once the config's token-badge authority has issued a badge, and the v2 swap passes the hook accounts.
 
 ## Build
 
