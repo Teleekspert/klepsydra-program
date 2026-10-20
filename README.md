@@ -50,7 +50,9 @@ A holder's accrued SOL is `(mag_per_share Ã— last_balance + correction) / 2^64 â
 
 PDAs: `config = ["config", mint]`, `holder = ["holder", token_account]`, `extra-account-metas = ["extra-account-metas", mint]`.
 
-Clients must pass the hook's extra accounts on transfers. `createTransferCheckedWithTransferHookInstruction` from `@solana/spl-token` does this, as do Jupiter, Raydium CPMM and Meteora DAMM v2.
+Clients must pass the hook's extra accounts on transfers. `createTransferCheckedWithTransferHookInstruction` from `@solana/spl-token` does this.
+
+Where the token can trade: Raydium CPMM accepts Token-2022 mints with an active transfer hook (its `SwapV2` forwards the hook accounts). Meteora DAMM v2 does not: it accepts a hook only when both the hook program and authority are unset. Meteora DBC revokes the hook when the bonding curve completes, which would switch the dividend off, so it is not a launch path for this token.
 
 ## Build
 
