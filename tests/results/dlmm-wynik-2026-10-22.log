@@ -1,0 +1,16 @@
+OK   token z hookiem Klepsydry gotowy — 3zKqHshCazTxfzsfUTvtHq1AipCczoSUfHSgPJHLbYJ9
+OK   DLMM: preset z mainnetu (bin step 100) — 4jpfaYdgLWWSdiDR5zbCDiJJMCyxeBhGFQ6Km8DyBkBG
+OK   pula bez token badge jest odrzucana — custom program error: 0x17b6
+OK   DLMM: pula KLEPS/SOL z badge
+OK   pula odczytana — CKEtqe16s9sAyDWRMqSCNfPCzHQkebCn3dBtpnSU6S3U, X = SOL, Y = KLEPS, aktywny kubełek 1815
+OK   płynność: 10 SOL + 700 mln KLEPS (przelew przez hook)
+OK   hook: tokeny w puli nie zarabiają (registered_supply spadło) — 700 000 000 KLEPS wyszło z podziału
+OK   swap: kupno KLEPS za 1 SOL (hook przy wypłacie z puli) — 68 819 524 KLEPS
+OK   register kupującego — 2qkA4Nt5K8PBnvGaiYJaSyktjvdkEkJyJcuX1QoxqnU9taRaEhsPurrd2eBC6s96PuKwkKKooa35xCmSTyBffLWy
+OK   distribute 1 SOL — 63DWX3BxuMqR2mbYxYFWTLbWwGAYyvimkFzqvSfVMqWfnjXTQWyV9dAnEMgXDgMzLhi5zwxyLPPQUuUtHqRJLVqi
+OK   claim kupującego — 2kAQnMNPB3aAZz5Vc6Jyesy94ixfUMcVky7dCerRRmLYrgQqjWBK9fcwdjp4XiVkzjQ2YiRb3qn5cVUyv6KER5JN
+OK   kupujący dostał swoją część — oczekiwane 0.186594, otrzymał 0.186589 SOL (minus opłata)
+OK   swap: sprzedaż połowy KLEPS (hook przy wpłacie do puli)
+OK   hook: saldo kupującego w programie po sprzedaży — last_balance 34 409 762 KLEPS
+
+WYNIK: 14 OK, 0 FAIL

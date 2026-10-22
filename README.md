@@ -52,12 +52,13 @@ PDAs: `config = ["config", mint]`, `holder = ["holder", token_account]`, `extra-
 
 Clients must pass the hook's extra accounts on transfers. `createTransferCheckedWithTransferHookInstruction` from `@solana/spl-token` does this.
 
-Where the token can trade (checked 2026-10-20):
+Where the token can trade (checked 2026-10-20 and 2026-10-22):
 
 - **Raydium CPMM: no.** Creating a pool with the mainnet program (cloned to a local validator) fails with `6007 NotSupportMint`; the program accepts a transfer-hook mint only after Raydium whitelists it, and its vault transfers do not pass the hook accounts.
 - **Meteora DAMM v2: no.** It accepts a hook only when both the hook program and authority are unset.
 - **Meteora DBC: no.** It revokes the hook when the bonding curve completes, which would switch the dividend off.
 - **Orca Whirlpools: yes, with a token badge.** Whirlpools accept a transfer-hook mint once the config's token-badge authority has issued a badge, and the v2 swap passes the hook accounts.
+- **Meteora DLMM: yes on-chain, with a token badge from Meteora.** `swap2` and `add_liquidity2` resolve the hook accounts on-chain from the real token accounts. The Meteora TypeScript SDK (1.9.14), however, resolves them with zeroed source and destination addresses, which yields the wrong `holder` accounts; clients have to pass the correct ones (see `tests/dlmm-hook-test.cjs`).
 
 ## Build
 
@@ -71,7 +72,7 @@ The Solana platform tools ship cargo 1.84, so `Cargo.lock` was generated with `C
 
 ## Tests
 
-`tests/` holds the scripts and `tests/results/` the logs of the runs on 2026-10-19 and 2026-10-20.
+`tests/` holds the scripts and `tests/results/` the logs of the runs from 2026-10-19 to 2026-10-22.
 
 | Script | What it checks | Result |
 |---|---|---|
@@ -79,6 +80,7 @@ The Solana platform tools ship cargo 1.84, so `Cargo.lock` was generated with `C
 | `devnet-test-slow.mjs` | the same cycle on public devnet, throttled for the public RPC | 14/14 |
 | `streamflow-hook-test.mjs` | Streamflow vesting contracts moving $KLEPS through the hook | 9/9 |
 | `orca-hook-test.mjs` | Orca Whirlpools (mainnet program and config on a local validator, badge simulated): pool, liquidity, buy, dividend, claim, sell | 14/14 |
+| `dlmm-hook-test.cjs` | Meteora DLMM (mainnet program and preset on a local validator, badge account written directly; `dlmm-prep.cjs` prepares it): pool, liquidity, buy, dividend, claim, sell | 14/14 |
 | `cpmm-hook-test.mjs` | Raydium CPMM (mainnet program on a local validator): pool creation | rejected, `6007 NotSupportMint` |
 | `create-devnet-mint.mjs` | creates the test mint, removes its authorities, runs `initialize` | — |
 
